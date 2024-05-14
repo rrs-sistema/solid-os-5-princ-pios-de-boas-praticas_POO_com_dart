@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:soliid_storage/src/model/carrinho_compra_model.dart';
+import 'package:soliid_storage/src/model/normal/carrinho_compra_model.dart';
 
 void main() {
   test('deveMostraItensDaCompra', () {
