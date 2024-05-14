@@ -1,28 +1,59 @@
-import 'package:soliid_storage/src/model/solid/carrinho_compra_model_solid.dart';
-import 'package:soliid_storage/src/model/solid/item_model_solid.dart';
-import 'package:soliid_storage/src/model/solid/pedido_model_solid.dart';
 import 'package:test/test.dart';
 
+import 'package:soliid_storage/src/model/model.dart';
+
+import './mocks/mocks.dart';
+
 void main() {
-  test('deveVelidarSeTemNome', () {
-    PedidoModelSolid pedido = PedidoModelSolid();
-    ItemModelSolid item1 = ItemModelSolid();
-    item1.nome = 'Produto Item 001';
-    pedido.getCarrinhoCompra()!.incluirItem(item: item1);
+  late PedidoModelSolid pedido;
+  late List<ItemModelSolid> makeItensInValido;
+  late List<ItemModelSolid> makeItensValido;
 
-    ItemModelSolid item2 = ItemModelSolid();
-    item2.nome = 'Produto Item 002';
-    pedido.getCarrinhoCompra()!.incluirItem(item: item2);
+  setUp(() {
+    // Create object model.
+    pedido = PedidoModelSolid();
+    // Create mock object.
+    makeItensInValido = FakeItensFactory.makeItensInValido();
+    makeItensValido = FakeItensFactory.makeItensValido();
+  });
 
-    ItemModelSolid item3 = ItemModelSolid();
-    item3.nome = 'Produto Item 003';
-    pedido.getCarrinhoCompra()!.incluirItem(item: item3);
+  test('testarEstadoInicialDosItens', () {
+    final result = pedido.getCarrinhoCompra()!.incluirItens(itens: makeItensInValido);
+    expect(result, false);
+  });
 
-    CarrinhoCompraModelSolid? carrinho = pedido.getCarrinhoCompra();
-    List<ItemModelSolid>? itens = carrinho!.getItens();
-    //for (var item in itens!) {}
+  test('deveGarantirFuncionamentoMetodoSetName', () {
+    final item = ItemModelSolid();
+    item.id = '001';
+    item.name = 'Bicicleta';
+    expect(item.name, 'Bicicleta');
+  });
 
-    //print('Carrinho: ===> ${itens!.length}');
-    expect(itens!.length, 3);
+  test('deveGarantirFuncionamentoMetodoSetValue', () {
+    final item = ItemModelSolid();
+    item.id = '001';
+    item.value = 1500;
+    expect(item.value, 1500);
+  });
+
+  test('deveValidarInsercaoItensRetornandoTRUE', () {
+    final result = pedido.getCarrinhoCompra()!.incluirItens(itens: makeItensValido);
+    expect(true, result);
+  });
+
+  test('deveValidarCarrinhoRetornandoTRUE', () {
+    pedido.getCarrinhoCompra()!.incluirItens(itens: makeItensValido);
+    final result = pedido.getCarrinhoCompra()!.validarCarrinho();
+    expect(true, result);
+  });
+
+  test('deveInValidarInsercaoItensRetornandoFALSE', () {
+    final result = pedido.getCarrinhoCompra()!.incluirItens(itens: makeItensInValido);
+    expect(false, result);
+  });
+
+  test('deveInValidarCarrinhoRetornandoFALSE', () {
+    final result = pedido.getCarrinhoCompra()!.validarCarrinho();
+    expect(false, result);
   });
 }

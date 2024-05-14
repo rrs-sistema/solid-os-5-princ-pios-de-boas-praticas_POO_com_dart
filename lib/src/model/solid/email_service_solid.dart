@@ -1,9 +1,11 @@
+// ignore_for_file: unused_field
+
 class EmailServiceSolid {
-  late String _email;
-  late String _de;
-  late String _para;
-  late String _assunto;
-  late String _conteudo;
+  String? _email;
+  String? _de;
+  String? _para;
+  String? _assunto;
+  String? _conteudo;
 
   EmailServiceSolid(
       {String? email = 'contato@site.com.br',

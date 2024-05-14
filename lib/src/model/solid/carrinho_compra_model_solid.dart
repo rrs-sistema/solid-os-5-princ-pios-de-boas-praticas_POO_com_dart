@@ -14,7 +14,16 @@ class CarrinhoCompraModelSolid {
   }
 
   bool incluirItem({required ItemModelSolid item}) {
+    if (item.name == '' || item.value < 1) return false;
     _itens!.add(item);
+    return true;
+  }
+
+  bool incluirItens({required List<ItemModelSolid> itens}) {
+    final resultItens = itens.where((i) => i.name == '' || i.value < 0).firstOrNull;
+    if (resultItens != null) return false;
+
+    _itens!.addAll(itens);
     return true;
   }
 

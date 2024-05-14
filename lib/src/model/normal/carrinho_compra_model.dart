@@ -10,12 +10,23 @@ class CarrinhoCompraModel {
     _valor = 0;
   }
 
-  bool incluirItem({required String nome, required double valor}) {
-    _itens!.add({'item': nome, 'valor': valor});
-    if (_valor != null) {
-      _valor = _valor! + valor;
+  bool itemValido({required String nome, required double valor}) {
+    if (nome.isEmpty) {
+      return false;
+    }
+    if (valor < 1) {
+      return false;
     }
     return true;
+  }
+
+  bool incluirItem({required String nome, required double valor}) {
+    if (itemValido(nome: nome, valor: valor)) {
+      _itens!.add({'item': nome, 'valor': valor});
+      _valor = _valor! + valor;
+      return true;
+    }
+    return false;
   }
 
   int? exibirTotalItens() {

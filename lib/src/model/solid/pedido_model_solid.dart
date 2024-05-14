@@ -1,4 +1,6 @@
-import 'package:soliid_storage/src/model/solid/carrinho_compra_model_solid.dart';
+// ignore_for_file: unused_field
+
+import './carrinho_compra_model_solid.dart';
 
 class PedidoModelSolid {
   String? _status;
