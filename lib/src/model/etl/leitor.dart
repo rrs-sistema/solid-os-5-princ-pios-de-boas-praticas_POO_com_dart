@@ -15,13 +15,14 @@ class Leitor {
     _arquivo = arquivoParam;
   }
 
-  static late List<List<dynamic>> tabelaProduto;
-
-  Future<List<List<dynamic>>> lerArquivo() async {
+  Future<List<List<dynamic>>> lerArquivo(Leitor leitor) async {
     // carrega os produtos do arquivo CSV
     //final arquivoProdutosCsv = await rootBundle.loadString('assets/file/produtos.csv');
     //tabelaProduto = const CsvToListConverter().convert(arquivoProdutosCsv, fieldDelimiter: ';');
-    final arquivoProdutosCsv = await rootBundle.loadString('$directory/$file');
+    String dir = leitor.directory;
+    String fil = leitor.file;
+    String caminho = '$dir/$fil';
+    final arquivoProdutosCsv = await rootBundle.loadString(caminho);
     return CsvToListConverter().convert(arquivoProdutosCsv, fieldDelimiter: ';');
   }
 }
