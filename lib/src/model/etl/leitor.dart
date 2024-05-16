@@ -1,5 +1,4 @@
-import 'package:csv/csv.dart';
-import 'package:flutter/services.dart';
+import 'package:soliid_storage/src/model/etl/arquivo.dart';
 
 class Leitor {
   String? _diretorio;
@@ -15,14 +14,17 @@ class Leitor {
     _arquivo = arquivoParam;
   }
 
-  Future<List<List<dynamic>>> lerArquivo(Leitor leitor) async {
-    // carrega os produtos do arquivo CSV
-    //final arquivoProdutosCsv = await rootBundle.loadString('assets/file/produtos.csv');
-    //tabelaProduto = const CsvToListConverter().convert(arquivoProdutosCsv, fieldDelimiter: ';');
-    String dir = leitor.directory;
-    String fil = leitor.file;
-    String caminho = '$dir/$fil';
-    final arquivoProdutosCsv = await rootBundle.loadString(caminho);
-    return CsvToListConverter().convert(arquivoProdutosCsv, fieldDelimiter: ';');
+  Future<String> pegaCaminhoArquivo() async {
+    return '$_diretorio/$_arquivo';
+  }
+
+  Future<List<List<dynamic>>> lerArquivoCSV(String caminho) async {
+    Arquivo file = Arquivo();
+    return await file.lerArquivoCSV(caminho);
+  }
+
+  Future<String> lerArquivoTXT(String caminho) async {
+    Arquivo arquivo = Arquivo();
+    return await arquivo.lerArquivoTexto(caminho);
   }
 }

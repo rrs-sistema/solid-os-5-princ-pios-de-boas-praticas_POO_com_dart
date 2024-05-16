@@ -5,16 +5,33 @@ import 'package:soliid_storage/src/model/etl/leitor.dart';
 import 'package:test/test.dart';
 
 void main() {
+  late Leitor leitor;
+  setUp(() {
+    leitor = Leitor();
+    leitor.directory = 'assets/file';
+    leitor.file = 'produtos.csv';
+  });
+
   flutter_test.testWidgets('Counter increments smoke test',
       (flutter_test.WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
   });
 
+  test('deveRetornarCaminhoArquivo', () async {
+    String? caminhoArquivo = await leitor.pegaCaminhoArquivo();
+    expect(caminhoArquivo, isNotNull);
+  });
+
   test('deveLerArquivoCSV', () async {
-    Leitor leitor = Leitor();
-    leitor.directory = 'assets/file';
-    leitor.file = 'produtos.csv';
-    var list = await leitor.lerArquivo(leitor);
-    expect(list.length, 2783);
+    String? caminhoArquivo = await leitor.pegaCaminhoArquivo();
+    var listaObjeto = await leitor.lerArquivoCSV(caminhoArquivo);
+    expect(listaObjeto.length, 2783);
+  });
+
+  test('deveLerArquivoText', () async {
+    leitor.file = 'produto.txt';
+    String? caminhoArquivo = await leitor.pegaCaminhoArquivo();
+    var listaObjeto = await leitor.lerArquivoTXT(caminhoArquivo);
+    expect(listaObjeto, isNotNull);
   });
 }
