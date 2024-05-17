@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart' as flutter_test;
 import 'package:soliid_storage/main.dart';
 
-import 'package:soliid_storage/src/model/etl/leitor.dart';
+import 'package:soliid_storage/src/etl/leitor.dart';
 import 'package:test/test.dart';
 
 void main() {

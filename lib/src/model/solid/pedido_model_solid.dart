@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field
 
-import './carrinho_compra_model_solid.dart';
+import 'carrinho_compra_model_solid.dart';
 
 class PedidoModelSolid {
   String? _status;
