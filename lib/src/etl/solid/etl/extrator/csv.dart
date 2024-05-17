@@ -29,7 +29,7 @@ class CSVSolid extends ArquivoSolid {
         }
       }
     } catch (e) {
-      log('ERRO AO LER O ARQUIVO: ${e.toString()}');
+      log('ERRO AO LER O ARQUIVO CSV: ${e.toString()}');
     }
     return gettDados();
   }

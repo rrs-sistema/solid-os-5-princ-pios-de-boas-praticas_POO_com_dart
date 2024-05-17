@@ -10,22 +10,30 @@ void main() {
   setUp(() {
     leitor = LeitorSolid();
     leitor.directory = 'assets/file';
+    leitor.file = 'produtos';
   });
 
-  flutter_test.testWidgets('Counter increments smoke test',
-      (flutter_test.WidgetTester tester) async {
+  flutter_test.testWidgets('Teste inicial com flutter', (flutter_test.WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
   });
 
   test('deveRetornarUmaListaDoArquivoCSV', () async {
-    leitor.file = 'produtos.csv';
     var lista = await leitor.lerArquivo(TipoArquivo.csv);
     expect(lista?.length, 2782);
   });
 
   test('deveRetornarUmaListaDoArquivoTXT', () async {
-    leitor.file = 'produto.txt';
     var lista = await leitor.lerArquivo(TipoArquivo.txt);
     expect(lista?.length, 10);
+  });
+
+  test('deveRetornarUmaListaVaziaDoArquivoJSOM', () async {
+    var lista = await leitor.lerArquivo(TipoArquivo.json);
+    expect(lista?.length, 0);
+  });
+
+  test('deveRetornarUmaListaVaziaDoArquivoXML', () async {
+    var lista = await leitor.lerArquivo(TipoArquivo.xml);
+    expect(lista?.length, 0);
   });
 }
