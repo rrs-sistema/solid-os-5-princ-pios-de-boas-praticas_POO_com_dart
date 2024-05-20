@@ -1,0 +1,1 @@
+export './icadastro.dart';
