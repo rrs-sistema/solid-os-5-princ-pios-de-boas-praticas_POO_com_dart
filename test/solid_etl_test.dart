@@ -29,7 +29,7 @@ void main() {
   });
 
   test('deveLerArquivoText', () async {
-    leitor.file = 'produto.txt';
+    leitor.file = 'produtos.txt';
     String? caminhoArquivo = await leitor.pegaCaminhoArquivo();
     var listaObjeto = await leitor.lerArquivoTXT(caminhoArquivo);
     expect(listaObjeto, isNotNull);
