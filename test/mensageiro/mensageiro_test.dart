@@ -36,4 +36,28 @@ void main() {
     var result = mensageiro.enviarToken();
     expect(result, 'Push: Seu token é: 333-111');
   });
+
+  test('deveRetornarMensagemComTokenPeloEmailDIP', () async {
+    Email email = Email();
+    MensageiroDependencyInersionPrinciple mensageiroDIP =
+        MensageiroDependencyInersionPrinciple(email);
+    var result = mensageiroDIP.enviarToken();
+    expect(result, 'E-mail: Seu token é: 777-555 - Email');
+  });
+
+  test('deveRetornarMensagemComTokenPeloSMSDIP', () async {
+    SMS sms = SMS();
+    MensageiroDependencyInersionPrinciple mensageiroDIP =
+        MensageiroDependencyInersionPrinciple(sms);
+    var result = mensageiroDIP.enviarToken();
+    expect(result, 'SMS: Seu token é: 666-444 - SMS');
+  });
+
+  test('deveRetornarMensagemComTokenPeloSMSPush', () async {
+    Push push = Push();
+    MensageiroDependencyInersionPrinciple mensageiroDIP =
+        MensageiroDependencyInersionPrinciple(push);
+    var result = mensageiroDIP.enviarToken();
+    expect(result, 'Push: Seu token é: 333-111 - Push');
+  });
 }
